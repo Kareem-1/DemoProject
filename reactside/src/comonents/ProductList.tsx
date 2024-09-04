@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 
-
-interface ProductData {
-    id: string;
-    name: string;
-    price: string;
-    item_type: string;
-    item_feature: string;
-}
 
 export default function ProductList() {
     const [data, setData] = useState<any[]>([]);
@@ -23,27 +16,27 @@ export default function ProductList() {
             console.error(e);
         }
     }
-    useEffect(()=>{
-        checkedData.map((d)=>{
+    useEffect(() => {
+        checkedData.map((d) => {
             let quotedData = `"${d}"`;
             setSendData([...sendData, quotedData]);
         })
     }, [checkedData])
-    const handleDelete = async  ()=>{
+    const handleDelete = async () => {
         console.log(checkedData);
-        
+
         console.log(sendData);
-        try{
-            let res = await fetch('http://localhost:80/demoproject/phpside/',{
+        try {
+            let res = await fetch('http://localhost:80/demoproject/phpside/', {
                 method: "DELETE",
                 headers: {
                     'Content-Type': "application/json",
-                  },
-                  body: JSON.stringify(sendData)
+                },
+                body: JSON.stringify(sendData)
             })
             let info = await res.json();
             console.log(info);
-        }catch(e){
+        } catch (e) {
             console.error(e);
         }
     }
@@ -56,8 +49,8 @@ export default function ProductList() {
             <div>
                 <p>Product List</p>
                 <div>
-                    <p>ADD</p>
-                    <button onClick={()=>{handleDelete()}}>MASS DELETE</button>
+                    <Link to="add-product"><button>ADD</button></Link>
+                    <button onClick={() => { handleDelete() }}>MASS DELETE</button>
                 </div>
             </div>
             <div className="product_list">
@@ -78,7 +71,7 @@ export default function ProductList() {
                     }
                     return (
                         <div className="product_items" key={info.id}>
-                            <input type="checkbox" className="delete-checkbox" onClick={(e)=>{setCheckedData([...checkedData, info.id]);}}/>
+                            <input type="checkbox" className="delete-checkbox" onClick={(e) => { setCheckedData([...checkedData, info.id]); }} />
                             <p>Item SKU: {info.id}</p>
                             <p>Item Name: {info.name}</p>
                             <p>Item Price: {info.price}</p>
