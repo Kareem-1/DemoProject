@@ -8,42 +8,34 @@ export default function ProductList() {
     const [sendData, setSendData] = useState<string[]>([]);
     const getItems = async () => {
         try {
-            let res = await fetch('http://localhost:80/demoproject/backend/')
-                .then(async (info) => { let data = await info.json(); setData(data.data); })
-            //.then(results => setData(results));
-            // console.log(data);
+            const res = await fetch('http://localhost:80/demoproject/backend/')
+                .then(async (info) => { const data = await info.json(); setData(data.data); })
         } catch (e) {
             console.error(e);
         }
     }
     useEffect(() => {
         checkedData.map((d) => {
-            let quotedData = `"${d}"`;
+            const quotedData = `"${d}"`;
             setSendData([...sendData, quotedData]);
         })
     }, [checkedData])
     const handleDelete = async () => {
-        console.log(checkedData);
-
-        console.log(sendData);
         try {
-            let res = await fetch('http://localhost:80/demoproject/backend/', {
+            const res = await fetch('http://localhost:80/demoproject/backend/', {
                 method: "DELETE",
                 headers: {
                     'Content-Type': "application/json",
                 },
                 body: JSON.stringify(sendData)
             })
-            let info = await res.json();
-            console.log(info);
         } catch (e) {
             console.error(e);
         }
     }
     useEffect(() => {
         getItems();
-        // console.log(data);
-    }, [])
+    }, [data])
     return (
         <div>
             <div>

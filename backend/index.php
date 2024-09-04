@@ -30,11 +30,11 @@ $conn = $objectDb->connect();
 switch ($method) {
     case "POST":
         $input = json_decode(file_get_contents('php://input'), true);
-        $item_sku = $input['item_sku'] ?? null;
-        $item_name = $input['item_name'] ?? null;
-        $item_price = $input['item_price'] ?? null;
-        $item_type = $input['item_type'] ?? null;
-        $item_feature = $input['item_feature'] ?? null;
+        $item_sku = $_POST['item_sku'] ?? null;
+        $item_name = $_POST['item_name'] ?? null;
+        $item_price = $_POST['item_price'] ?? null;
+        $item_type = $_POST['item_type'] ?? null;
+        $item_feature = $_POST['item_feature'] ?? null;
         //Just if conditions for error handling, and not for the logic of the products
         if (!$item_sku || !$item_name || !$item_price || !$item_type || !$item_feature) {
             echo json_encode(['status' => 'error', 'message' => 'Missing product data', 'type' => $item_type]);

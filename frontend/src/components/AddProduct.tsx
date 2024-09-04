@@ -1,62 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../sass.scss'
 
-interface ProductData {
-  item_sku: string;
-  item_name: string;
-  item_price: string;
-  item_type: string;
-  item_feature: string;
-}
 
 export default function AddProduct() {
   const [itemType, setItemType] = useState<string>('');
-  const [itemSku, setItemSku] = useState<string>('');
-  const [itemName, setItemName] = useState<string>('');
-  const [itemPrice, setItemPrice] = useState<string>('');
-  const [itemFeature, setItemFeature] = useState<string>('');
-  const [itemHeight, setItemHeight] = useState<string>('');
-  const [itemWidth, setItemWidth] = useState<string>('');
-  const [itemLength, setItemLength] = useState<string>('');
   const [msg, setMsg] = useState<string>('');
 
-  useEffect(() => {
-    setItemFeature('');
-    setItemHeight('');
-    setItemWidth('');
-    setItemLength('');
-  }, [itemType]);
 
-  const handleClick = async (formData: FormData) => {
-    console.log(itemType);
-    let dimensions = `${itemHeight}x${itemWidth}x${itemLength}`;
-    let dataI: ProductData = {
-      item_sku: itemSku,
-      item_name: itemName,
-      item_price: itemPrice,
-      item_type: itemType,
-      item_feature: itemFeature,
-    };
-    if (itemHeight != '' && itemWidth != '' && itemLength != '') {
-      dataI = {
-        item_sku: itemSku,
-        item_name: itemName,
-        item_price: itemPrice.toString(),
-        item_type: itemType,
-        item_feature: dimensions,
-      };
+
+  const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("item_sku", e.currentTarget['item_sku'].value);
+    formData.append("item_name", e.currentTarget['item_name'].value);
+    formData.append("item_price", e.currentTarget['item_price'].value);
+    formData.append("item_type", e.currentTarget['item_type'].value);
+    if (e.currentTarget['item_height'] != undefined) {
+      const itemHeight = e.currentTarget['item_height'].value || null;
+      const itemWidth = e.currentTarget['item_width'].value || null;
+      const itemLength = e.currentTarget['item_length'].value || null;
+      const dimensions = `${itemHeight}x${itemWidth}x${itemLength}`;
+      formData.append("item_feature", dimensions)
+    } else {
+      formData.append("item_feature", e.currentTarget['item_feature'].value);
     }
     try {
-      let res: Response = await fetch("http://localhost:80/demoproject/backend/", {
-        method: 'POST',
-        headers: {
-          'Content-Type': "application/json",
-        },
-        body: JSON.stringify(dataI),
+      const res: Response = await fetch("http://localhost:80/demoproject/backend/", {
+        method:"POST",
+        body: formData,
       });
 
       //setMsg(data.item_name + data.item_price + data.item_sku);
-      let info = await res.json();
+      const info = await res.json();
       console.log(info)
       setMsg(info.item_sku + info.item_name + info.item_price + info.item_type)
     } catch (e) {
@@ -67,18 +43,18 @@ export default function AddProduct() {
     <div className="App">
       <h2 className='title'>Product Add</h2>
       <hr />
-      <form action={handleClick} method='POST' id='product_form'>
+      <form onSubmit={(e) => { handleClick(e) }} method='POST' id='product_form'>
         <label className='add_labels'>
           <p>SKU</p>
-          <input required name='item_sku' id='item_sku' value={itemSku} onChange={(e) => { setItemSku(e.target.value) }} type="text" />
+          <input required name='item_sku' id='item_sku' type="text" />
         </label>
         <label className='add_labels'>
           <p>Name</p>
-          <input required name='item_name' id='item_name' value={itemName} onChange={(e) => { setItemName(e.target.value) }} />
+          <input required name='item_name' id='item_name' />
         </label>
         <label className='add_labels'>
           <p>Price</p>
-          <input required name='item_price' id='item_price' onChange={(e) => { setItemPrice(e.target.value) }} />
+          <input required name='item_price' id='item_price' />
         </label>
         <label className='add_labels'>
           <p>Item Type</p>
@@ -94,7 +70,7 @@ export default function AddProduct() {
           <div>
             <label>
               <p>Weight</p>
-              <input required type='number' name='item_feature' id='item_feature' onChange={(e) => { setItemFeature(e.target.value) }} />
+              <input required type='number' name='item_feature' id='item_feature' />
             </label>
           </div>
         }
@@ -103,7 +79,7 @@ export default function AddProduct() {
           <div>
             <label>
               <p>Size</p>
-              <input required type='number' name='item_feature' id='item_feature' onChange={(e) => { setItemFeature(e.target.value) }} />
+              <input required type='number' name='item_feature' id='item_feature' />
             </label>
           </div>
         }
@@ -112,15 +88,15 @@ export default function AddProduct() {
           <div>
             <label>
               <p>Height</p>
-              <input type='number' name='item_height' id='item_height' onChange={(e) => { setItemHeight(e.target.value) }} />
+              <input type='number' name='item_height' id='item_height' />
             </label>
             <label>
               <p>Width</p>
-              <input type='number' name='item_width' id='item_width' onChange={(e) => { setItemWidth(e.target.value) }} />
+              <input type='number' name='item_width' id='item_width' />
             </label>
             <label>
               <p>Length</p>
-              <input type='number' name='item_length' id='item_length' onChange={(e) => { setItemLength(e.target.value) }} />
+              <input type='number' name='item_length' id='item_length' />
             </label>
           </div>
         }
