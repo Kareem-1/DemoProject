@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import AddProduct from './comonents/AddProduct';
-import ProductList from './comonents/ProductList';
+import AddProduct from './components/AddProduct';
+import ProductList from './components/ProductList';
 import './sass.scss'
 
 

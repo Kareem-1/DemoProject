@@ -17,8 +17,8 @@ hr, .title {
 }
 
 .add_labels p {
-    margin: 0; // Reset margin to avoid extra spacing
-    padding: 0; // Reset padding for consistency
+    margin: 0; 
+    padding: 0; 
 }
 
 .add_labels {
@@ -29,9 +29,9 @@ hr, .title {
 }
 
 .add_labels input {
-    height: auto; // Ensure height is not being overridden
-    padding: 0.2rem; // Set padding for input fields
-    font-size: 1rem; // Standard font size
+    height: auto; 
+    padding: 0.2rem; 
+    font-size: 1rem; 
 }
 
 .add_labels p {

@@ -8,7 +8,7 @@ export default function ProductList() {
     const [sendData, setSendData] = useState<any[]>([]);
     const getItems = async () => {
         try {
-            let res = await fetch('http://localhost:80/demoproject/phpside/')
+            let res = await fetch('http://localhost:80/demoproject/backend/')
                 .then(async (info) => { let data = await info.json(); setData(data.data); })
             //.then(results => setData(results));
             // console.log(data);
@@ -27,7 +27,7 @@ export default function ProductList() {
 
         console.log(sendData);
         try {
-            let res = await fetch('http://localhost:80/demoproject/phpside/', {
+            let res = await fetch('http://localhost:80/demoproject/backend/', {
                 method: "DELETE",
                 headers: {
                     'Content-Type': "application/json",

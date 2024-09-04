@@ -18,15 +18,15 @@ include "Book.php";
 $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method == "OPTIONS") {
-    // Send a 200 OK response for OPTIONS requests
     http_response_code(200);
     exit();
 }
 
-// Connect to the database
+// Connecting to db
 $objectDb = new DbConnect;
 $conn = $objectDb->connect();
 
+//Seperating request behavior
 switch ($method) {
     case "POST":
         $input = json_decode(file_get_contents('php://input'), true);
@@ -55,7 +55,6 @@ switch ($method) {
         if ($statement->execute()) {
             $items = $statement->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode(['status' => 'success', 'data' => $items]);
-            //return true;
             exit();
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Database insert failed']);
@@ -76,7 +75,6 @@ switch ($method) {
         }
 
     default:
-        // Handle other methods or send a 405 Method Not Allowed response
         http_response_code(405);
         echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
         break;

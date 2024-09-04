@@ -49,7 +49,7 @@ export default function AddProduct() {
     }
     console.log(dataI);
     try {
-      let res: Response = await fetch("http://localhost:80/demoproject/phpside/index.php", {
+      let res: Response = await fetch("http://localhost:80/demoproject/backend/", {
         method: 'POST',
         headers: {
           'Content-Type': "application/json",
