@@ -13,7 +13,7 @@ export default function AddProduct() {
   const [itemType, setItemType] = useState<string>('');
   const [itemSku, setItemSku] = useState<string>('');
   const [itemName, setItemName] = useState<string>('');
-  const [itemPrice, setItemPrice] = useState<number>(0);
+  const [itemPrice, setItemPrice] = useState<string>('');
   const [itemFeature, setItemFeature] = useState<string>('');
   const [itemHeight, setItemHeight] = useState<string>('');
   const [itemWidth, setItemWidth] = useState<string>('');
@@ -27,18 +27,17 @@ export default function AddProduct() {
     setItemLength('');
   }, [itemType]);
 
-  const handleClick = async (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    e.preventDefault();
+  const handleClick = async (formData: FormData) => {
     console.log(itemType);
-    let dimensions = itemHeight + "x" + itemWidth + "x" + itemLength;
+    let dimensions = `${itemHeight}x${itemWidth}x${itemLength}`;
     let dataI: ProductData = {
       item_sku: itemSku,
       item_name: itemName,
-      item_price: itemPrice.toString(),
+      item_price: itemPrice,
       item_type: itemType,
       item_feature: itemFeature,
     };
-    if (itemHeight != '' && itemWidth != '' && itemLength  != '') {
+    if (itemHeight != '' && itemWidth != '' && itemLength != '') {
       dataI = {
         item_sku: itemSku,
         item_name: itemName,
@@ -47,7 +46,6 @@ export default function AddProduct() {
         item_feature: dimensions,
       };
     }
-    console.log(dataI);
     try {
       let res: Response = await fetch("http://localhost:80/demoproject/backend/", {
         method: 'POST',
@@ -69,7 +67,7 @@ export default function AddProduct() {
     <div className="App">
       <h2 className='title'>Product Add</h2>
       <hr />
-      <form method='POST' id='product_form'>
+      <form action={handleClick} method='POST' id='product_form'>
         <label className='add_labels'>
           <p>SKU</p>
           <input required name='item_sku' id='item_sku' value={itemSku} onChange={(e) => { setItemSku(e.target.value) }} type="text" />
@@ -80,11 +78,11 @@ export default function AddProduct() {
         </label>
         <label className='add_labels'>
           <p>Price</p>
-          <input required name='item_price' id='item_price' onChange={(e) => { setItemPrice(parseInt(e.target.value)) }} />
+          <input required name='item_price' id='item_price' onChange={(e) => { setItemPrice(e.target.value) }} />
         </label>
         <label className='add_labels'>
           <p>Item Type</p>
-          <select defaultValue='none' name='item_type' id='item_type' onChange={(e) => { setItemType(e.target.value) }}>
+          <select required defaultValue='none' name='item_type' id='item_type' onChange={(e) => { setItemType(e.target.value) }}>
             <option disabled value="none">None</option>
             <option value="Furniture">Furniture</option>
             <option value="DVD">DVD</option>
@@ -96,7 +94,7 @@ export default function AddProduct() {
           <div>
             <label>
               <p>Weight</p>
-              <input type='number' name='item_feature' id='item_feature' onChange={(e) => { setItemFeature(e.target.value) }} />
+              <input required type='number' name='item_feature' id='item_feature' onChange={(e) => { setItemFeature(e.target.value) }} />
             </label>
           </div>
         }
@@ -105,7 +103,7 @@ export default function AddProduct() {
           <div>
             <label>
               <p>Size</p>
-              <input type='number' name='item_feature' id='item_feature' onChange={(e) => { setItemFeature(e.target.value) }} />
+              <input required type='number' name='item_feature' id='item_feature' onChange={(e) => { setItemFeature(e.target.value) }} />
             </label>
           </div>
         }
@@ -127,7 +125,7 @@ export default function AddProduct() {
           </div>
         }
         <label className='add_labels'>
-          <input type="submit" onClick={(e) => { handleClick(e); }} />
+          <button type="submit">Submit</button>
         </label>
       </form>
       <p>{msg}</p>

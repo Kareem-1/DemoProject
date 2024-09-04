@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 
 export default function ProductList() {
-    const [data, setData] = useState<any[]>([]);
-    const [checkedData, setCheckedData] = useState<any[]>([]);
-    const [sendData, setSendData] = useState<any[]>([]);
+    const [data, setData] = useState<Record<string, any>[]>([]);
+    const [checkedData, setCheckedData] = useState<Record<string, any>[]>([]);
+    const [sendData, setSendData] = useState<string[]>([]);
     const getItems = async () => {
         try {
             let res = await fetch('http://localhost:80/demoproject/backend/')
