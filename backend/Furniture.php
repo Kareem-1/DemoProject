@@ -28,6 +28,7 @@ class Furniture extends Items
             exit();
         }
     }
+
     public function getDimensions(){
         return $this->dimensions;
     }

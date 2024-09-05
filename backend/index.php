@@ -29,7 +29,6 @@ $conn = $objectDb->connect();
 //Seperating request behavior
 switch ($method) {
     case "POST":
-        $input = json_decode(file_get_contents('php://input'), true);
         $item_sku = $_POST['item_sku'] ?? null;
         $item_name = $_POST['item_name'] ?? null;
         $item_price = $_POST['item_price'] ?? null;
@@ -42,6 +41,10 @@ switch ($method) {
         }
         if (class_exists($item_type)) {
             $product = new $item_type($item_sku, $item_name, $item_price, $item_feature);
+            if ($product->checkExists($conn, $item_sku)) {
+                echo json_encode(['status' => 'error', 'message' => 'Item SKU already exists']);
+                exit();
+            }
             $product->save($conn);
             echo json_encode(['status' => 'success', 'message' => 'POST received', 'item_name' => $product->getName(), 'item_price' => $item_price, 'item_sku' => $item_sku, 'item_type' => $item_type]);
         } else {
@@ -50,29 +53,17 @@ switch ($method) {
         break;
 
     case "GET":
-        $sql = "SELECT * FROM items_information;";
-        $statement = $conn->prepare($sql);
-        if ($statement->execute()) {
-            $items = $statement->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode(['status' => 'success', 'data' => $items]);
-            exit();
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Database insert failed']);
-            exit();
-        }
+        $items_class = new Furniture(null,null,null,null);
+        $items_class->getItems($conn);
+        exit();
 
     case "DELETE":
         $inputs = json_decode(file_get_contents('php://input'), true);
         $seperated = implode(', ', $inputs);
-        $query = "DELETE FROM items_information WHERE id IN ($seperated);";
-        $statement = $conn->prepare($query);
-        if ($statement->execute()) {
-            echo json_encode(['message' => 'SUCCESS']);
-            exit();
-        } else {
-            echo json_encode(['message' => 'FAILED']);
-            exit();
-        }
+        $items_class = new Furniture(null,null,null,null);
+        $items_class->deleteItems($conn, $seperated);
+       // echo json_encode(["inputs"=>$inputs, "seperated"=>$seperated]);
+        break;
 
     default:
         http_response_code(405);

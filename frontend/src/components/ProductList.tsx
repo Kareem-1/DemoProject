@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import '../sass/list.scss'
 
 
 export default function ProductList() {
     const [data, setData] = useState<Record<string, any>[]>([]);
     const [checkedData, setCheckedData] = useState<Record<string, any>[]>([]);
     const [sendData, setSendData] = useState<string[]>([]);
+    const navigate = useNavigate();
+    const handleAdd  = () =>{
+        navigate('/add-product');
+    }
     const getItems = async () => {
         try {
             const res = await fetch('http://localhost:80/demoproject/backend/')
@@ -15,6 +20,7 @@ export default function ProductList() {
         }
     }
     useEffect(() => {
+
         checkedData.map((d) => {
             const quotedData = `"${d}"`;
             setSendData([...sendData, quotedData]);
@@ -29,6 +35,8 @@ export default function ProductList() {
                 },
                 body: JSON.stringify(sendData)
             })
+            const data = await res.json();
+            console.log(data);
         } catch (e) {
             console.error(e);
         }
@@ -37,37 +45,44 @@ export default function ProductList() {
         getItems();
     }, [data])
     return (
-        <div>
-            <div>
-                <p>Product List</p>
-                <div>
-                    <Link to="add-product"><button>ADD</button></Link>
-                    <button onClick={() => { handleDelete() }}>MASS DELETE</button>
-                </div>
+        <div className="product-list">
+            <div className="header">
+                <h1>Product List</h1>
+                <button onClick={()=>{handleAdd()}} id="add-product-btn">ADD</button>
+                <button id="delete-product-btn" onClick={() => { handleDelete() }}>MASS DELETE</button>
+
             </div>
-            <div className="product_list">
+            <hr />
+            <div className="products">
                 {data.map((info) => {
-                    let uniqueItem: string = "";
-                    let type: string = "";
+                    let uniqueItem = "";
+                    let type = "";
+                    let metric = "";
                     if (info.size != null) {
                         uniqueItem = info.size;
                         type = 'Size';
+                        metric = "MBS"
                     }
                     if (info.weight != null) {
                         uniqueItem = info.weight;
                         type = "Weight";
+                        metric = "KG"
                     }
                     if (info.dimensions != null) {
                         uniqueItem = info.dimensions;
                         type = "Dimensions";
+                        metric = "HxWxL"
+
                     }
                     return (
-                        <div className="product_items" key={info.id}>
+                        <div className="product" key={info.id}>
                             <input type="checkbox" className="delete-checkbox" onClick={(e) => { setCheckedData([...checkedData, info.id]); }} />
-                            <p>Item SKU: {info.id}</p>
-                            <p>Item Name: {info.name}</p>
-                            <p>Item Price: {info.price}</p>
-                            <p>{type}: {uniqueItem}</p>
+                            <div className="product-details">
+                                <p>Item SKU: {info.id}</p>
+                                <p>Item Name: {info.name}</p>
+                                <p>Item Price: {info.price}</p>
+                                <p>{type}: {uniqueItem} ({metric})</p>
+                            </div>
                         </div>
                     )
                 })}
