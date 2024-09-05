@@ -494,3 +494,7 @@ Stack trace:
 #1 C:\xampp\htdocs\DemoProject\backend\index.php(44): Book->save(Object(PDO))
 #2 {main}
   thrown in C:\xampp\htdocs\DemoProject\backend\Book.php on line 22
+[05-Sep-2024 08:25:17 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "DbConnect" not found in C:\xampp\htdocs\DemoProject\backend\index.php:26
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\DemoProject\backend\index.php on line 26

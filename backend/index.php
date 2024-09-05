@@ -9,11 +9,11 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
-include "DbConnect.php";
-include "items.php";
-include "Furniture.php";
-include "DVD.php";
-include "Book.php";
+include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/DbConnect.php";
+include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/Items.php";
+include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/Furniture.php";
+include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/DVD.php";
+include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/Book.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -62,7 +62,6 @@ switch ($method) {
         $seperated = implode(', ', $inputs);
         $items_class = new Furniture(null,null,null,null);
         $items_class->deleteItems($conn, $seperated);
-       // echo json_encode(["inputs"=>$inputs, "seperated"=>$seperated]);
         break;
 
     default:

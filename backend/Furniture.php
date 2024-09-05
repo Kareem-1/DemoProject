@@ -1,5 +1,4 @@
 <?php
-//include "Items.php";
 
 class Furniture extends Items
 {

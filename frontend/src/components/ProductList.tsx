@@ -13,7 +13,7 @@ export default function ProductList() {
     }
     const getItems = async () => {
         try {
-            const res = await fetch('http://localhost:80/demoproject/backend/')
+            const res = await fetch('scandi-demo-backend.infinityfreeapp.com/')
                 .then(async (info) => { const data = await info.json(); setData(data.data); })
         } catch (e) {
             console.error(e);
@@ -28,7 +28,7 @@ export default function ProductList() {
     }, [checkedData])
     const handleDelete = async () => {
         try {
-            const res = await fetch('http://localhost:80/demoproject/backend/', {
+            const res = await fetch('scandi-demo-backend.infinityfreeapp.com/', {
                 method: "DELETE",
                 headers: {
                     'Content-Type': "application/json",

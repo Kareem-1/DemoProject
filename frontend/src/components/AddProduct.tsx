@@ -57,7 +57,7 @@ export default function AddProduct() {
 
     //request
     try {
-      const res: Response = await fetch("http://localhost:80/demoproject/backend/", {
+      const res: Response = await fetch("scandi-demo-backend.infinityfreeapp.com/", {
         method: "POST",
         body: formData,
       });
