@@ -8,12 +8,12 @@ export default function ProductList() {
     const [checkedData, setCheckedData] = useState<Record<string, any>[]>([]);
     const [sendData, setSendData] = useState<string[]>([]);
     const navigate = useNavigate();
-    const handleAdd  = () =>{
+    const handleAdd = () => {
         navigate('/add-product');
     }
     const getItems = async () => {
         try {
-            const res = await fetch('scandi-demo-backend.infinityfreeapp.com/')
+            const res = await fetch('https://scandi-demo-backend.infinityfreeapp.com/?i=1')
                 .then(async (info) => { const data = await info.json(); setData(data.data); })
         } catch (e) {
             console.error(e);
@@ -28,7 +28,7 @@ export default function ProductList() {
     }, [checkedData])
     const handleDelete = async () => {
         try {
-            const res = await fetch('scandi-demo-backend.infinityfreeapp.com/', {
+            const res = await fetch('https://scandi-demo-backend.infinityfreeapp.com/?i=1', {
                 method: "DELETE",
                 headers: {
                     'Content-Type': "application/json",
@@ -48,12 +48,12 @@ export default function ProductList() {
         <div className="product-list">
             <div className="header">
                 <h1>Product List</h1>
-                <button onClick={()=>{handleAdd()}} id="add-product-btn">ADD</button>
+                <button onClick={() => { handleAdd() }} id="add-product-btn">ADD</button>
                 <button id="delete-product-btn" onClick={() => { handleDelete() }}>MASS DELETE</button>
 
             </div>
             <hr />
-            <div className="products">
+            {data && <div className="products">
                 {data.map((info) => {
                     let uniqueItem = "";
                     let type = "";
@@ -86,7 +86,11 @@ export default function ProductList() {
                         </div>
                     )
                 })}
-            </div>
+            </div>}
+            {
+                data.length == 0 &&
+                <div>Loading Data</div>
+            }
         </div>
     )
 }
