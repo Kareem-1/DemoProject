@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import '../sass/list.scss'
 
 
@@ -17,6 +17,7 @@ export default function ProductList() {
                 method: "GET"
             })
                 .then(async (info) => { const data = await info.json(); setData(data.data); })
+            
         } catch (e) {
             console.error(e);
         }
