@@ -89,10 +89,6 @@ export default function ProductList() {
                     )
                 })}
             </div>}
-            {
-                data.length == 0 &&
-                <div>Loading Data</div>
-            }
         </div>
     )
 }
