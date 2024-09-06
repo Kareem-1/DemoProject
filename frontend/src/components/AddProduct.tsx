@@ -57,7 +57,7 @@ export default function AddProduct() {
 
     //request
     try {
-      const res: Response = await fetch("https://scandi-demo-backend.infinityfreeapp.com/", {
+      const res: Response = await fetch("https://demo-backend-vercel.fly.dev/api/", {
         method: "POST",
         body: formData,
       });

@@ -1,3 +1,4 @@
+
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -9,11 +10,11 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
-include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/DbConnect.php";
-include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/Items.php";
-include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/Furniture.php";
-include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/DVD.php";
-include "/home/vol3_5/infinityfree.com/if0_37248096/htdocs/Book.php";
+include "DbConnect.php";
+include "Items.php";
+include "Furniture.php";
+include "DVD.php";
+include "Book.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
 

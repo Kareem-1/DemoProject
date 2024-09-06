@@ -1,9 +1,9 @@
 <?php
 	class DbConnect {
-		private $server = 'sql312.infinityfree.com';
-		private $dbname = 'if0_37248096_Items';
-		private $user = 'if0_37248096';
-		private $pass = 'mN0JEqcm3ISDLKv';
+		private $server = 'sql12.freemysqlhosting.net';
+		private $dbname = 'sql12729930';
+		private $user = 'sql12729930';
+		private $pass = 't4AT5ahY83';
 
 		public function connect() {
 			try {

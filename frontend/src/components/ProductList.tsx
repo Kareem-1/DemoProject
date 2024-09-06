@@ -13,7 +13,9 @@ export default function ProductList() {
     }
     const getItems = async () => {
         try {
-            const res = await fetch('https://scandi-demo-backend.infinityfreeapp.com/?i=1')
+            const res = await fetch('https://demo-backend-vercel.fly.dev/api/', {
+                method: "GET"
+            })
                 .then(async (info) => { const data = await info.json(); setData(data.data); })
         } catch (e) {
             console.error(e);
@@ -28,7 +30,7 @@ export default function ProductList() {
     }, [checkedData])
     const handleDelete = async () => {
         try {
-            const res = await fetch('https://scandi-demo-backend.infinityfreeapp.com/?i=1', {
+            const res = await fetch('https://demo-backend-vercel.fly.dev/api/', {
                 method: "DELETE",
                 headers: {
                     'Content-Type': "application/json",
