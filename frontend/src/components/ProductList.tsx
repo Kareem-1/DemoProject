@@ -13,7 +13,7 @@ export default function ProductList() {
     }
     const getItems = async () => {
         try {
-            const res = await fetch('https://demo-backend-vercel.fly.dev/api/', {
+            await fetch('https://demo-backend-vercel.fly.dev/api/', {
                 method: "GET"
             })
                 .then(async (info) => { const data = await info.json(); setData(data.data); })
@@ -79,7 +79,7 @@ export default function ProductList() {
                     }
                     return (
                         <div className="product" key={info.id}>
-                            <input type="checkbox" className="delete-checkbox" onClick={(e) => { setCheckedData([...checkedData, info.id]); }} />
+                            <input type="checkbox" className="delete-checkbox" onClick={(_e) => { setCheckedData([...checkedData, info.id]); }} />
                             <div className="product-details">
                                 <p>Item SKU: {info.id}</p>
                                 <p>Item Name: {info.name}</p>
