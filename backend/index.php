@@ -10,21 +10,32 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
+
 include "DbConnect.php";
 include "Items.php";
 include "Furniture.php";
 include "DVD.php";
 include "Book.php";
 
-$method = $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD'] ?? "GET";
 
 if ($method == "OPTIONS") {
     http_response_code(200);
     exit();
 }
 
+
+require 'vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 // Connecting to db
-$objectDb = new DbConnect;
+$url = $_ENV["DATABASE_URL"];
+$databasename = $_ENV["DATABASE_NAME"];
+$username = $_ENV["USERNAME"];
+$password = $_ENV["DATABASE_PASSWORD"];
+
+$objectDb = new DbConnect($url, $databasename, $username, $password);
 $conn = $objectDb->connect();
 
 //Seperating request behavior
