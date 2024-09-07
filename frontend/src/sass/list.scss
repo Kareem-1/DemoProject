@@ -1,6 +1,24 @@
+$primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+$background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+$font-family: 'Lato', sans-serif;
+$box-shadow-light: 0 10px 15px rgba(0, 0, 0, 0.1);
+$box-shadow-hover: 0 12px 25px rgba(0, 0, 0, 0.2);
+$box-shadow-product: 0 15px 25px rgba(0, 0, 0, 0.1);
+$box-shadow-product-hover: 0 20px 35px rgba(0, 0, 0, 0.15);
+$border-radius-header: 12px;
+$border-radius-product: 20px;
+$padding-header: 20px 40px;
+$padding-product: 30px;
+$padding-button: 12px 25px;
+$font-size-h1: 2.5rem;
+$font-size-p: 1.1rem;
+$color-text-primary: #6a11cb;
+$color-text-secondary: #333;
+$color-white: #fff;
+
 body {
-  font-family: 'Lato', sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: $font-family;
+  background: $background-gradient;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,25 +35,26 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
-  background: #fff;
-  padding: 20px 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
+  background: $color-white;
+  padding: $padding-header;
+  border-radius: $border-radius-header;
+  box-shadow: $box-shadow-light;
 
-.header h1 {
-  font-size: 2.5rem;
-  letter-spacing: 1.5px;
-  font-weight: 700;
-  margin: 0;
+  h1 {
+    font-size: $font-size-h1;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    margin: 0;
+    color: $color-text-primary;
+  }
 }
 
 button {
-  padding: 12px 25px;
+  padding: $padding-button;
   border: none;
   border-radius: 50px;
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
+  background: $primary-gradient;
+  color: $color-white;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -43,11 +62,11 @@ button {
   align-items: center;
   gap: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
 
-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $box-shadow-hover;
+  }
 }
 
 .products {
@@ -57,43 +76,46 @@ button:hover {
 }
 
 .product {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  background-color: $color-white;
+  padding: $padding-product;
+  border-radius: $border-radius-product;
+  box-shadow: $box-shadow-product;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.product:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
-}
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $box-shadow-product-hover;
+  }
 
-.product-details p {
-  margin: 10px 0;
-  font-size: 1.1rem;
-  color: #333;
-  line-height: 1.6;
-}
+  .product-details {
+    p {
+      margin: 10px 0;
+      font-size: $font-size-p;
+      color: $color-text-secondary;
+      line-height: 1.6;
 
-.product-details p:first-child {
-  font-weight: 600;
-  color: #6a11cb;
+      &:first-child {
+        font-weight: 600;
+        color: $color-text-primary;
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {
   .header {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-  }
-  
-  .header h1 {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h1 {
       margin-bottom: 20px;
+      color: $color-text-primary;
+    }
   }
-  
+
   button {
-      width: 100%;
-      margin-bottom: 15px;
+    width: 100%;
+    margin-bottom: 15px;
   }
 }

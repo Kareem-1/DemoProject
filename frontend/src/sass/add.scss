@@ -1,75 +1,172 @@
-$bg-color: #fff;
-$border-color: #000;
-$text-color: #000;
-$box-shadow-color: rgba(0, 0, 0, 0.2);
+$primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+$background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+$font-family: 'Lato', sans-serif;
+$box-shadow-light: 0 10px 15px rgba(0, 0, 0, 0.1);
+$box-shadow-hover: 0 12px 25px rgba(0, 0, 0, 0.2);
+$box-shadow-product: 0 15px 25px rgba(0, 0, 0, 0.1);
+$box-shadow-product-hover: 0 20px 35px rgba(0, 0, 0, 0.15);
+$border-radius-header: 12px;
+$border-radius-product: 20px;
+$padding-header: 20px 40px;
+$padding-form: 30px;
+$padding-button: 12px 25px;
+$font-size-h1: 2.5rem;
+$font-size-p: 1.1rem;
+$color-text-primary: #6a11cb;
+$color-text-secondary: #333;
+$color-white: #fff;
+$border-radius-input: 8px;
+
+body {
+  font-family: $font-family;
+  background: $background-gradient;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  
-    form {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background: $color-white;
+  border-radius: $border-radius-product;
+  box-shadow: $box-shadow-product;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: $box-shadow-product-hover;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+      color: $color-text-primary;
+    }
+
+    .form-actions {
       display: flex;
-      flex-direction: column;
-  
-      .header {
+      gap: 20px;
+
+      button {
+        padding: $padding-button;
+        border: none;
+        border-radius: 50px;
+        background: $primary-gradient;
+        color: $color-white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-  
-        .title {
-          font-size: 24px;
-        }
-  
-        .form-actions {
-          display: flex;
-          gap: 10px;
-  
-          button {
-            padding: 10px 20px;
-            background-color: $bg-color;
-            border: 1px solid $border-color;
-            cursor: pointer;
-            box-shadow: 0px 4px 8px $box-shadow-color;
-            margin-left: 10px; // Adds spacing between buttons
-            transition: all 0.3s ease;
-      
-            &:hover {
-              background-color: $border-color;
-              color: $bg-color;
-            }
-          }
-        }
-      }
-  
-      hr {
-        margin: 20px 0;
-      }
-  
-      .add_labels {
-        margin-bottom: 20px;
-        
-        p {
-          font-weight: bold;
-        }
-  
-        input {
-          width: 100%;
-          padding: 8px;
-          margin-top: 5px;
-          border-radius: 4px;
-          border: 1px solid #ccc;
-        }
-      }
-  
-      .book-type, .dvd-type, .furniture-type {
-        margin-bottom: 20px;
-  
-        .description {
-          margin-top: 10px;
-          font-style: italic;
-          color: #888;
+        gap: 10px;
+        box-shadow: $box-shadow-light;
+
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: $box-shadow-hover;
         }
       }
     }
   }
-  
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .add_labels {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: $font-size-p;
+      color: $color-text-secondary;
+
+      p {
+        margin: 0;
+        font-weight: 600;
+      }
+
+      input,
+      select {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: $border-radius-input;
+        font-size: 1rem;
+        color: $color-text-secondary;
+        background: #f9f9f9;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          border-color: $color-text-primary;
+          outline: none;
+        }
+      }
+    }
+
+    .description {
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    .book-type,
+    .dvd-type,
+    .furniture-type {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .furniture-type {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+  }
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+  margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 15px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    .title {
+      font-size: 1.75rem;
+    }
+
+    .form-actions {
+      width: 100%;
+      flex-direction: column;
+      gap: 10px;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  form {
+    .furniture-type {
+      grid-template-columns: 1fr;
+    }
+  }
+}
