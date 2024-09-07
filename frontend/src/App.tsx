@@ -1,20 +1,26 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import AddProduct from './components/AddProduct';
-import ProductList from './components/ProductList';
+import { Route, Routes } from "react-router-dom";
+import ProductList from "./pages/ProductList/ProductList";
+import AddProduct from "./pages/AddProduct/AddProduct";
+import Footer from "./components/Footer/Footer";
+import useInitData from "./hooks/useInitData";
+import { useEffect } from "react";
 
-
-function App() {
-
+export default function App() {
+  const initData = useInitData();
+  
+  useEffect(() => {
+    initData();
+  }, [])
+  
   return (
-    <div className="App">
-      <BrowserRouter>
+    <>
+      <main>
         <Routes>
           <Route index element={<ProductList />} />
-          <Route path='add-product' element={<AddProduct />} />
+          <Route path="add-product" element={<AddProduct />} />
         </Routes>
-      </BrowserRouter>
-    </div>
-  );
+      </main>
+      <Footer />
+    </>
+  )
 }
-
-export default App;

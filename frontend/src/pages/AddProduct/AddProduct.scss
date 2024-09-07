@@ -1,0 +1,21 @@
+#product_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    label {
+        display: flex;
+        max-width: 500px;
+        
+        span {
+            width: 200px
+        }
+        
+        input, select {
+            border: 2px solid black;
+            display: flex;
+            flex-grow: 1;
+            outline: none;
+        }
+    }
+}
