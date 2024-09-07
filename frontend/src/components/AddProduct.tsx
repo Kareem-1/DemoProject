@@ -81,7 +81,7 @@ export default function AddProduct() {
     <div className="App">
       <form onSubmit={e => { handleSubmit(e); }} id='product_form'>
         <div className="header">
-          <h2 className="title">Product List</h2>
+          <h2 className="title">Product Add</h2>
           <div className="form-actions">
             <button type="submit" className="save-btn">Save</button>
             <Link to="/"><button type="button" className="cancel-btn">Cancel</button></Link>
