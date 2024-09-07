@@ -24,7 +24,6 @@ export default function AddProduct() {
         return setMsg("Please, submit required data");
       }
 
-      
     }
 
     //Validation of existence of unique properties to add it in formData, and validation for value type
@@ -72,7 +71,7 @@ export default function AddProduct() {
       setMsg(info.item_sku + info.item_name + info.item_price + info.item_type);
       if (res.ok) {
         if (info.status == "error") {
-          setMsg("Please, use an SKU that does not already exist");
+          setMsg(info.message);
           setLoading(false);
         } else {
           initData();

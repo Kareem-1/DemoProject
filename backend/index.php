@@ -62,7 +62,7 @@ switch ($method) {
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Invalid product type']);
         }
-        break;
+        exit();
 
     case "GET":
         $items_class = new Furniture(null,null,null,null);
@@ -74,11 +74,11 @@ switch ($method) {
         $seperated = implode(', ', $inputs);
         $items_class = new Furniture(null,null,null,null);
         $items_class->deleteItems($conn, $seperated);
-        break;
+        exit();
 
     default:
         http_response_code(405);
         echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
-        break;
+        exit();
 }
 
