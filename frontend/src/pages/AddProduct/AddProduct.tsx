@@ -24,7 +24,7 @@ export default function AddProduct() {
         return setMsg("Please, submit required data");
       }
 
-      if (key === "item_price" && (!Number(value) || Number(value) <= 0)) {
+      if (key === "item_price" && (!Number(value))) {
         return setMsg("Please, provide a valid price");
       }
     }
