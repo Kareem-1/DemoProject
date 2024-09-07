@@ -24,9 +24,7 @@ export default function AddProduct() {
         return setMsg("Please, submit required data");
       }
 
-      if (key === "item_price" && (!Number(value))) {
-        return setMsg("Please, provide a valid price");
-      }
+      
     }
 
     //Validation of existence of unique properties to add it in formData, and validation for value type
