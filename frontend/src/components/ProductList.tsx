@@ -83,7 +83,7 @@ export default function ProductList() {
                             <div className="product-details">
                                 <p>Item SKU: {info.id}</p>
                                 <p>Item Name: {info.name}</p>
-                                <p>Item Price: {info.price}</p>
+                                <p>Item Price: ${info.price}</p>
                                 <p>{type}: {uniqueItem} ({metric})</p>
                             </div>
                         </div>
