@@ -19,7 +19,7 @@ export default function AddProduct() {
     const formData = new FormData(e.currentTarget);
 
     //Validation of data existence, and item's price data type
-    for (const [key, value] of formData.entries()) {
+    for (const [, value] of formData.entries()) {
       if (!value) {
         return setMsg("Please, submit required data");
       }
