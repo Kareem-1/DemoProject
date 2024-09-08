@@ -18,7 +18,6 @@ export default function AddProduct() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-
     //Validation of existence of unique properties to add it in formData, and validation for value type
     if (e.currentTarget["item_height"] != undefined) {
       const itemHeight = e.currentTarget["item_height"].value || null;
@@ -49,7 +48,6 @@ export default function AddProduct() {
         if (info.status == "formerror") {
           setMsg(info.message);
           setLoading(false);
-          navigate("/");
         } else {
           initData();
           navigate("/");
