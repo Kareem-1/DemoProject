@@ -86,7 +86,7 @@ export default function AddProduct() {
       </label>
       <label className="text-input">
         <span>Price ($)</span>
-        <input id="price" step="0.000001" type="number" name="item_price" />
+        <input id="price" name="item_price" />
       </label>
 
       <label className="add_labels">
@@ -101,13 +101,13 @@ export default function AddProduct() {
           </option>
           <option value="Furniture">Furniture</option>
           <option value="DVD">DVD</option>
-          <option value="Book">Book</option>
+          <option value="book">book</option>
         </select>
       </label>
 
       {itemType === "DVD" && <><label>
         <span>Size (MB)</span>
-        <input id="size" type="number" name="item_size" />
+        <input id="size" name="item_size" />
       </label>
         <p className="description">
           Please provide the size in megabytes of the DVD
@@ -117,7 +117,7 @@ export default function AddProduct() {
       {itemType === "Book" && <>
         <label>
           <span>Weight (KG)</span>
-          <input id="weight" step="0.000001" type="number" name="item_weight" />
+          <input id="weight" name="item_weight" />
         </label>
         <p className="description">
           Please provide the weight of the book in kilograms
@@ -127,15 +127,15 @@ export default function AddProduct() {
       {itemType === "Furniture" && <>
         <label>
           <span>Height (CM)</span>
-          <input id="height" type="number" name="item_height" />
+          <input id="height" name="item_height" />
         </label>
         <label>
           <span>Width (CM)</span>
-          <input id="width" type="number" name="item_width" />
+          <input id="width" name="item_width" />
         </label>
         <label>
           <span>Length (CM)</span>
-          <input id="length" type="number" name="item_length" />
+          <input id="length" name="item_length" />
         </label>
         <p className="description">
           Please provide the dimensions in HxWxL format
