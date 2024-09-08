@@ -49,6 +49,7 @@ export default function AddProduct() {
         if (info.status == "formerror") {
           setMsg(info.message);
           setLoading(false);
+          navigate("/");
         } else {
           initData();
           navigate("/");
