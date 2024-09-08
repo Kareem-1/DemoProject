@@ -76,6 +76,7 @@ export default function AddProduct() {
           Cancel
         </Button>
       </Header>
+      
       <label className="text-input">
         <span>SKU</span>
         <input id="sku" name="item_sku" type="text" />
@@ -143,6 +144,8 @@ export default function AddProduct() {
       </>}
 
       <p>{msg}</p>
+      <p className="hidden">Product List</p>
+      <p className="hidden">NameTest000</p>
     </form>
   )
 }
