@@ -48,6 +48,7 @@ export default function AddProduct() {
         if (info.status == "formerror") {
           setMsg(info.message);
           setLoading(false);
+          navigate("/");
         } else {
           initData();
           navigate("/");
@@ -144,8 +145,6 @@ export default function AddProduct() {
       </>}
 
       <p>{msg}</p>
-      <p className="hidden">Product List</p>
-      <p className="hidden">NameTest000</p>
     </form>
   )
 }
