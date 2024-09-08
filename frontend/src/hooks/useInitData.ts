@@ -6,7 +6,7 @@ export default function useInitData() {
   const { setData, setLoading } = useContext(AppContext);
 
   const initData = async () => {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     setLoading(true);
     try {
       const response = await fetch("https://demo-backend-vercel.fly.dev/api/", {
@@ -20,10 +20,6 @@ export default function useInitData() {
       await initData();
     } finally {
       setLoading(false);
-      if(window.location.href != "https://demo-project-frontend-bice.vercel.app/"){
-        navigate('/');
-      }
-      
     }
   };
 

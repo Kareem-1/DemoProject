@@ -52,6 +52,7 @@ export default function AddProduct() {
         } else {
           initData();
           navigate("/");
+          navigate("/");
         }
       }
     } catch (e) {
