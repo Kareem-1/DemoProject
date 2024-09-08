@@ -85,7 +85,7 @@ export default function AddProduct() {
       </label>
       <label className="text-input">
         <span>Price ($)</span>
-        <input id="price" step="0.01" type="number" name="item_price" />
+        <input id="price" step="0.000001" type="number" name="item_price" />
       </label>
 
       <label className="add_labels">
