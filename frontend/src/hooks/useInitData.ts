@@ -20,7 +20,10 @@ export default function useInitData() {
       await initData();
     } finally {
       setLoading(false);
-      navigate('/');
+      if(window.location.href != "https://demo-project-frontend-bice.vercel.app/"){
+        navigate('/');
+      }
+      
     }
   };
 
