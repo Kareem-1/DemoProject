@@ -68,12 +68,11 @@ export default function AddProduct() {
         setFormData(new FormData(e.currentTarget))
       }}>
       <Header title="Product Add">
-        {
-          itemType !== "Book" &&
+
           <Button type="submit" id="add-product-btn">
             Save
           </Button>
-        }
+        
 
         <Button to="/" className="cancel-btn">
           Cancel
