@@ -101,7 +101,7 @@ export default function AddProduct() {
           </option>
           <option value="Furniture">Furniture</option>
           <option value="DVD">DVD</option>
-          <option value="book">book</option>
+          <option value="Book">Book</option>
         </select>
       </label>
 
