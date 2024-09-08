@@ -46,14 +46,11 @@ export default function AddProduct() {
       );
       const info = await res.json();
       if (res.ok) {
-        if (info.status == "error") {
+        console.log(info);
+        if (info.status == "formerror") {
           setMsg(info.message);
           setLoading(false);
-        }else if(info.status == "default"){
-          initData();
-          navigate("/");
-        }
-         else {
+        } else {
           initData();
           navigate("/");
         }
