@@ -75,7 +75,8 @@ export default function AddProduct() {
           Cancel
         </Button>
       </Header>
-
+      {itemType !== "Book" &&
+      <div>
       <label className="text-input">
         <span>SKU</span>
         <input id="sku" name="item_sku" type="text" />
@@ -87,7 +88,7 @@ export default function AddProduct() {
       <label className="text-input">
         <span>Price ($)</span>
         <input id="price" name="item_price" />
-      </label>
+      </label> </div>}
 
       <label className="add_labels">
         <span>Type Switcher</span>
