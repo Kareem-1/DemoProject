@@ -116,7 +116,7 @@ export default function AddProduct() {
       {itemType === "Book" && <>
         <label>
           <span>Weight (KG)</span>
-          <input id="weight" step="0.001" type="number" name="item_weight" />
+          <input id="weight" step="0.000001" type="number" name="item_weight" />
         </label>
         <p className="description">
           Please provide the weight of the book in kilograms
