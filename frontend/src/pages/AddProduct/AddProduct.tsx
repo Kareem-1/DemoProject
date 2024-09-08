@@ -68,15 +68,17 @@ export default function AddProduct() {
         setFormData(new FormData(e.currentTarget))
       }}>
       <Header title="Product Add">
-        <Button type="submit" id="add-product-btn">
-          Save
-        </Button>
+        {
+          itemType !== "Book" &&
+          <Button type="submit" id="add-product-btn">
+            Save
+          </Button>
+        }
+
         <Button to="/" className="cancel-btn">
           Cancel
         </Button>
       </Header>
-      {itemType !== "Book" &&
-      <div>
       <label className="text-input">
         <span>SKU</span>
         <input id="sku" name="item_sku" type="text" />
@@ -88,7 +90,7 @@ export default function AddProduct() {
       <label className="text-input">
         <span>Price ($)</span>
         <input id="price" name="item_price" />
-      </label> </div>}
+      </label>
 
       <label className="add_labels">
         <span>Type Switcher</span>
