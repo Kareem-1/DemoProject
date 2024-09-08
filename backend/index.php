@@ -48,16 +48,16 @@ switch ($method) {
 
 
         if(is_nan($item_price)){
-            echo json_encode(['status' => 'error', 'message' => 'Please, provide the data of indicated type']);
+            echo json_encode(['status' => 'error', 'message' => 'Please, provide the data of indicated type (Price)']);
         }
         if ($item_type == "DVD" || $item_type == "Book") {
             if (is_nan($item_feature)) {
-                echo json_encode(['status' => 'error', 'message' => 'Please, provide the data of indicated type']);
+                echo json_encode(['status' => 'error', 'message' => 'Please, provide the data of indicated type (Weight)']);
             }
         } else if ($item_type == "Furniture") {
             [$h, $w, $l] = explode('x', $item_feature);
             if (is_nan($h) || is_nan($w) || is_nan($l)) {
-                echo json_encode(['status' => 'error', 'message' => 'Please, provide the data of indicated type']);
+                echo json_encode(['status' => 'error', 'message' => 'Please, provide the data of indicated type (HXWXL)']);
             }
         }
         

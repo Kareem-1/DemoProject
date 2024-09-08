@@ -15,10 +15,7 @@ export default function App() {
   return (
     <>
       <main>
-        <Routes>
-          <Route index element={<ProductList />} />
-          <Route path="add-product" element={<AddProduct />} />
-        </Routes>
+        
       </main>
       <Footer />
     </>
