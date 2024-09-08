@@ -49,9 +49,9 @@ export default function AddProduct() {
         if (info.status == "error") {
           setMsg(info.message);
           setLoading(false);
+          navigate("/");
         } else {
           initData();
-          navigate("/");
           navigate("/");
         }
       }
