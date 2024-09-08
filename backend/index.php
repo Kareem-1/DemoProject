@@ -1,4 +1,3 @@
-
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -46,6 +45,24 @@ switch ($method) {
         $item_price = $_POST['item_price'] ?? null;
         $item_type = $_POST['item_type'] ?? null;
         $item_feature = $_POST['item_feature'] ?? null;
+
+
+        if(is_nan($item_price)){
+            echo json_encode(['status' => 'error', 'message' => 'Please, provide the data of indicated type']);
+        }
+        if ($item_type == "DVD" || $item_type == "Book") {
+            if (is_nan($item_feature)) {
+                echo json_encode(['status' => 'error', 'message' => 'Please, provide the data of indicated type']);
+            }
+        } else if ($item_type == "Furniture") {
+            [$h, $w, $l] = explode('x', $item_feature);
+            if (is_nan($h) || is_nan($w) || is_nan($l)) {
+                echo json_encode(['status' => 'error', 'message' => 'Please, provide the data of indicated type']);
+            }
+        }
+        
+
+
         //Just if conditions for error handling, and not for the logic of the products
         if (!$item_sku || !$item_name || !$item_price || !$item_type || !$item_feature) {
             echo json_encode(['status' => 'error', 'message' => 'Missing product data', 'type' => $item_type]);
@@ -65,14 +82,14 @@ switch ($method) {
         exit();
 
     case "GET":
-        $items_class = new Furniture(null,null,null,null);
+        $items_class = new Furniture(null, null, null, null);
         $items_class->getItems($conn);
         exit();
 
     case "DELETE":
         $inputs = json_decode(file_get_contents('php://input'), true);
         $seperated = implode(', ', $inputs);
-        $items_class = new Furniture(null,null,null,null);
+        $items_class = new Furniture(null, null, null, null);
         $items_class->deleteItems($conn, $seperated);
         exit();
 

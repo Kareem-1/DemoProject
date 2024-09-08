@@ -18,13 +18,6 @@ export default function AddProduct() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    //Validation of data existence, and item's price data type
-    for (const [, value] of formData.entries()) {
-      if (!value) {
-        return setMsg("Please, submit required data");
-      }
-
-    }
 
     //Validation of existence of unique properties to add it in formData, and validation for value type
     if (e.currentTarget["item_height"] != undefined) {
@@ -32,30 +25,14 @@ export default function AddProduct() {
       const itemWidth = e.currentTarget["item_width"].value || null;
       const itemLength = e.currentTarget["item_length"].value || null;
       const dimensions = `${itemHeight}x${itemWidth}x${itemLength}`;
-      if (
-        isNaN(Number(itemHeight)) ||
-        isNaN(Number(itemLength)) ||
-        isNaN(Number(itemWidth))
-      ) {
-        setMsg("Please, provide valid dimensions");
-        return;
-      }
       formData.set("item_feature", dimensions);
     }
 
     if (e.currentTarget["item_weight"] != undefined) {
       formData.set("item_feature", e.currentTarget["item_weight"].value);
-      if (isNaN(Number(e.currentTarget["item_weight"].value))) {
-        setMsg("Please, provide valid weight");
-        return;
-      }
     }
     if (e.currentTarget["item_size"] != undefined) {
       formData.set("item_feature", e.currentTarget["item_size"].value);
-      if (isNaN(Number(e.currentTarget["item_size"].value))) {
-        setMsg("Please, provide valid size");
-        return;
-      }
     }
 
     try {
@@ -68,7 +45,6 @@ export default function AddProduct() {
         },
       );
       const info = await res.json();
-      setMsg(info.item_sku + info.item_name + info.item_price + info.item_type);
       if (res.ok) {
         if (info.status == "error") {
           setMsg(info.message);
